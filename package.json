@@ -1,0 +1,34 @@
+{
+  "name": "generator-axios-lambda",
+  "version": "0.2.0",
+  "description": "",
+  "scripts": {
+    "setup": "pip install awscli && npm install -g yo gulp-cli && npm install && npm link"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/axioscode/generator-axios"
+  },
+  "files": [
+    "generators"
+  ],
+  "keywords": [
+    "yeoman-generator",
+    "axios"
+  ],
+  "author": "Gerald Rich <duner@axios.com>",
+  "contributors": [
+    "Catherine Sheffo <catherine@axios.com>",
+  ],
+  "license": "Apache-2.0",
+  "dependencies": {
+    "yeoman-generator": "^1.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "babelify": "^7.3.0",
+    "dateformat": "^2.0.0",
+    "mkdirp": "^0.5.1",
+    "slugify": "^1.1.0"
+  }
+}

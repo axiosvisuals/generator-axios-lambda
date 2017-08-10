@@ -58,8 +58,6 @@ module.exports = Generator.extend({
     );
   },
   writing: function () {
-    var generatorName = this.fs.readJSON(this.destinationPath('project.json')).name;
-
     this.fs.copyTpl(
       this.templatePath('functions/lambda_tmpl/**'),
       this.destinationPath(path.join('functions', this.options['function-name'])),

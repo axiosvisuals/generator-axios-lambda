@@ -5,8 +5,8 @@
   "memory": 128,
   "timeout": <%= meta.timeout %> <% if (meta.vpc === true)  { %>,
   "vpc": {
-    "securityGroups" : [""],
-    "subnets" : [""]
+    "securityGroups" : ["sg-f6827f8c"],
+    "subnets" : ["subnet-dd575cba"]
   }
   <% } %>
 }

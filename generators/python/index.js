@@ -72,7 +72,7 @@ module.exports = Generator.extend({
     var currSubFolder = 'functions/' + this.options['function-name'];
     var currRequirements = currSubFolder + '/requirements.txt';
     this.spawnCommand('cd',[currSubFolder])
-    this.spawnCommand('pip', ['install', '-r', currRequirements, '-t', currSubFolder])
+    this.spawnCommand('pip3', ['install', '-r', currRequirements, '-t', currSubFolder])
   },
 
   end: function() {

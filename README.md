@@ -47,7 +47,7 @@ from base64 import b64decode
 
 kms = boto3.client('kms')
 
-with open('encrypted_secrets.txt', 'r') as encrypted_f:
+with open('encrypted_secrets.json', 'r') as encrypted_f:
   encrypted_secrets_dict = json.loads(encrypted_f.read())
 
 encrypted_cipher_str = encrypted_secrets_dict['CiphertextBlob']

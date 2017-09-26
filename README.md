@@ -3,9 +3,9 @@ Yeoman generator to make developing Lambda Functions at Axios simpler and faster
 
 ## Generators
 
-### axios:lambda
+### axios-lambda
 
-`yo axios:lambda`
+`yo axios-lambda`
 Generate the boilerplate AWS Lambda project to be deployed using Apex
 
 ```bash
@@ -28,9 +28,9 @@ function av-lambda() {
 }
 ```
 
-### axios:lambda-node
+### axios-lambda:node
 
-`yo axios:lambda-node function_name`
+`yo axios-lambda:node function_name`
 
 Generate an AWS Lambda project with a Node.js function, named `function_name`
 
@@ -44,12 +44,12 @@ yo axios-lambda:node [function-name]
 To generate multiple Lambda functions within a project, just re-use the generator
 
 ```bash
-yo axios:lambda-node [function-name]
+yo axios-lambda:node [function-name]
 ```
 
-### axios:lambda-python
+### axios-lambda:python
 
-`yo axios:lambda-python function_name`
+`yo axios-lambda:python function_name`
 
 Generate an AWS Lambda project with a Python function, named `function_name`
 

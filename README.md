@@ -102,10 +102,6 @@ yo axios-lambda:python [function-name]
 ### Connecting to AWS Lambda
 We use a build tool `apex`. For more information, documentation, and examples visit [apex.run](http://apex.run).
 
-```
-apex init
-```
-
 If your lambda function utilizes an RDS database you'll need to follow these additional instructions to make sure the function has access to the database (for now this will need to be done in the console, ideally we can get this linked up to apex too):
 
 1. Set up new Lambda functions in us-west-2 only, to keep them in the same region as production database.

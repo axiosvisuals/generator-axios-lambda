@@ -1,8 +1,9 @@
-# generator-axios-graphic
+# generator-axios-lambda
 Yeoman generator to make developing Lambda Functions at Axios simpler and faster.
 
 ## Setup
 
+Within the generator-axios-lambda dir
 `npm run setup`
 
 This will
@@ -14,7 +15,7 @@ This will
 
 ### Encrypting secrets
 
-With this example, we'll use AWS KMS to store an encrypted copy of our API keys and then decrypt it on the fly with the Lambda function.
+With this example, we'll use AWS KMS to store an encrypted copy of our API keys and then decrypt it on the fly with the Lambda function.  AWS MFA must be enabled to create the CMK.
 
 1. [Create a customer master key (CMK) in KMS](http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) and note the keyId that is automatically generated.
 

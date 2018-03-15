@@ -6,6 +6,16 @@ import logging
 import boto3
 
 def publish_to_sns(json_message, topic_arn, summary_string="SNS summary"):
+    """
+    A helper function for publishing a message to SNS.
+    This assumes you have SNS publish permissions in AWS.
+
+    Accepts:
+        * a JSON containing the message to publish
+        * an SNS topic ARN string
+        * an optional summary string describing this message
+    Returns: None
+    """
     logger = logging.getLogger()
     sns = boto3.client('sns')
     try:

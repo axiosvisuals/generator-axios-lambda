@@ -1,6 +1,14 @@
 # generator-axios-lambda
 Yeoman generator to make developing Lambda Functions at Axios simpler and faster.
 
+## What's in here?
+Files necessary for creating a Lambda function managed by Apex, a command line tool for building, managing, and deploying functions.
+
+* `generators`
+  * `app` a Yeoman app for generating a Lambda functions' subdirectories
+  * `node` templates for a Node Lambda function
+  * `python` template for a Python Lambda function
+
 ## Setup
 
 Within the generator-axios-lambda dir
@@ -38,25 +46,25 @@ This comand takes a file from the `file://` path, outputs JSON with the encrypte
 
 See the [AWS KMS CLI help](http://docs.aws.amazon.com/cli/latest/reference/kms/index.html) for more information on input and output encoding.
 
-### Decrypting secrets
+### Utils
 
-Within the Python, `main.py`, you'll be able to decrypt the JSON and use it in your Python code
+#### Decrypting secrets
+
+Within the Python, `main.py`, you'll be able to decrypt the JSON and use it in your Python code. The code uses an AWS Python client, boto3, to establish a KMS client for decrypting your secrets. **Your Lambda function will also need permissions to use this KMS key**. Once you open up and read the encrypted file, you can read it in as a JSON string, then convert that to a Python dictionary.
 
 ```python
-import boto3
-from base64 import b64decode
-
-kms = boto3.client('kms')
-
-with open('encrypted_secrets.json', 'r') as encrypted_f:
-  encrypted_secrets_dict = json.loads(encrypted_f.read())
-
-encrypted_cipher_str = encrypted_secrets_dict['CiphertextBlob']
-decrypted_secrets_str = kms.decrypt(CiphertextBlob=b64decode(encrypted_cipher_str))['Plaintext']
-decrypted_secrets_dict = json.loads(decrypted_secrets_str)
+"""
+TKTKTK
+"""
 ```
 
-The code uses an AWS Python client, boto3, to establish a KMS client for decrypting your secrets. **Your Lambda function will also need permissions to use this KMS key**. Once you open up and read the encrypted file, you can read it in as a JSON string, then convert that to a Python dictionary.
+#### Publishing a message via SNS
+
+TKTKTK
+
+#### Writing to S3
+
+TKTKTK
 
 ## Generators
 

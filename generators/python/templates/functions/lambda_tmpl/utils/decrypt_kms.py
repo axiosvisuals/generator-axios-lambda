@@ -26,5 +26,3 @@ def decrypt_secrets(filename):
         return(decrypted_secrets_dict)
     except Exception as e:
         logger.error(e, "Error decrypting KMS encrypted file")
-    pass
-

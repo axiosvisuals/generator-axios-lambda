@@ -32,4 +32,3 @@ def publish_to_sns(json_message, topic_arn, summary_string="SNS summary"):
         )
     except Exception as e:
         logger.error(e, "Error publishing to SNS")
-    pass

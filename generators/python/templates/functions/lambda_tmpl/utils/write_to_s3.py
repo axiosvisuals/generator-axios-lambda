@@ -37,12 +37,12 @@ def write_to_s3(data, filename, s3_bucket_name, output_type):
             # Todo: QUOTE_ALL? QUOTE_MINIMAL? QUOTE_NONNUMERIC?
             # prevents commas in a CSV column from creating an additional column
             writer = csv.writer(csv_buffer, quoting=csv.QUOTE_NONNUMERIC)
-            for row in file_list:
+            for row in data:
                 writer.writerow(row)
             s3_client.put_object(
                 Bucket=s3_bucket_name,
                 Key=filename,
-                Body=json.dumps(data),
+                Body=Body=csv_buffer.getvalue(),
                 Metadata={'Content-Type': 'text/csv'}
             )
     except Exception as e:

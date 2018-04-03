@@ -21,18 +21,18 @@ def write_to_s3(data, filename, s3_bucket_name, output_type):
     """
     logger = logging.getLogger()
     s3_client = boto3.client('s3')
-    if output_type is not in ('csv', 'json'):
+    if output_type not in ('csv', 'json'):
         logger.error(e, "Error: invalid S3 output filetype")
         pass
     try:
-        if output_type is 'json':
+        if output_type == 'json':
             s3_client.put_object(
                 Bucket=s3_bucket_name,
                 Key=filename,
                 Body=json.dumps(data),
                 Metadata={'Content-Type': 'application/json'}
-            )ß
-        elif output_type is 'csv':
+            )
+        elif output_type == 'csv':
             csv_buffer = io.StringIO()
             # Todo: QUOTE_ALL? QUOTE_MINIMAL? QUOTE_NONNUMERIC?
             # prevents commas in a CSV column from creating an additional column

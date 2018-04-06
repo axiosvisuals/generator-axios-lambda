@@ -72,7 +72,6 @@ module.exports = Generator.extend({
   },
   install: function () {
     var currSubFolder = 'functions/' + this.options['function-name'] + "/"
-    this.spawnCommand('npm', ['install', '--prefix', currSubFolder, currSubFolder])
   },
   end: function() {
     this.log("Success! You may edit your new function in the 'functions/' folder\n")

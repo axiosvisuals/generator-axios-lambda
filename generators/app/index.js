@@ -89,9 +89,7 @@ module.exports = Generator.extend({
     this.log("\t> apex --help")
     this.log("\n2. If either command errors, run the following command:\n")
     this.log("\t> ./setup.sh\n")
-    this.log("3. Create Python or Node.js functions for your project:\n")
-    this.log("\t> yo axios:lambda-node <function name>\n")
-    this.log("OR...\n")
-    this.log("\t> axios:lambda-python <function name>")
+    this.log("3. Create additional functions for your project:\n")
+    this.log("\t> yo axios:lambda-<language> <function name>\n")
   }
 });

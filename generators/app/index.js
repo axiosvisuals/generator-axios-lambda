@@ -90,6 +90,6 @@ module.exports = Generator.extend({
     this.log("\n2. If either command errors, run the following command:\n")
     this.log("\t> ./setup.sh\n")
     this.log("3. Create additional functions for your project:\n")
-    this.log("\t> yo axios:lambda-<language> <function name>\n")
+    this.log("\t> yo axios:lambda-<node OR python OR go> <function_name>\n")
   }
 });

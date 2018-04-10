@@ -6,15 +6,23 @@ import (
 	"github.com/aws/aws-lambda-go/lambda"
 )
 
-type input struct {
-	Name    string
-	Species string
+type Request struct {
+	ID    float64 `json:"id"`
+	Value string  `json:"value"`
 }
 
-func greet(in *input) (string, error) {
-	return fmt.Sprintf("Hello %s, you are a %s", in.Name, in.Species), nil
+type Response struct {
+	Message string `json:"message"`
+	Ok      bool   `json:"ok"`
+}
+
+func Handler(request Request) (Response, error) {
+	return Response{
+		Message: fmt.Sprintf("Processed request ID %f", request.ID),
+		Ok:      true,
+	}, nil
 }
 
 func main() {
-	lambda.Start(greet)
+	lambda.Start(Handler)
 }

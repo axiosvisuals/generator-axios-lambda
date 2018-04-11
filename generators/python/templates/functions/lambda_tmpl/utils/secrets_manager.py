@@ -7,7 +7,7 @@ import boto3
 
 
 
-def get_secret(secret_name, endpoint_url, region_name):
+def get_secret(secret_name, region_name):
     """
     A helper function for getting secrets from AWS Secrets Manager.
     This assumes you have secrets manager permissions in AWS.

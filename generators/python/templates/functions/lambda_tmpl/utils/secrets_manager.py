@@ -13,7 +13,7 @@ def get_secret(secret_name, region_name):
     This assumes you have secrets manager permissions in AWS.
 
     Accepts: the name of the secret, the region the secrets is held in
-    Returns: a dictionary of API secrets or binary data
+    Returns: a dictionary of API secrets, binary data, or None if an error occurs
     """
     logger = logging.getLogger()
     session = boto3.session.Session()
@@ -33,6 +33,7 @@ def get_secret(secret_name, region_name):
             logger.error('The request was invalid due to: ' + str(e))
         elif e.response['Error']['Code'] == 'InvalidParameterException':
             logger.error('The request had invalid params: ' + str(e))
+        return None
     else:
         # Decrypted secret using the associated KMS CMK
         # Depending on whether the secret was a string or binary,

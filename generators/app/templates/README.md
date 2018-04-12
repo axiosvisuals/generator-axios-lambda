@@ -32,15 +32,15 @@ Default output format [None]: text
 
 Checkout our deploy tool's Github repo, Apex, for [more examples](https://github.com/apex/apex/tree/master/_examples) of developing AWS Lambda functions in different languages. If you're writing functions in Node.js or Python, you can use the generator again.
 
-### axios:lambda-node
+### axios-lambda:node
 
-`yo axios:lambda-node function_name`
+`yo axios-lambda:node function_name`
 
 Generate an AWS Lambda project with a Node.js function, named `function_name`
 
 ```bash
 mkdir [project-name] && cd $_
-yo axios:lambda-node [function-name]
+yo axios-lambda:node [function-name]
 ```
 
 #### Multiple functions
@@ -48,18 +48,18 @@ yo axios:lambda-node [function-name]
 To generate multiple Lambda functions within a project, just re-use the generator
 
 ```bash
-yo axios:lambda-node [function-name]
+yo axios-lambda:node [function-name]
 ```
 
-### axios:lambda-python
+### axios-lambda:python
 
-`yo axios:lambda-python function_name`
+`yo axios-lambda:python function_name`
 
 Generate an AWS Lambda project with a Python function, named `function_name`
 
 ```bash
 mkdir [project-name] && cd $_
-yo axios:lambda-python [function-name]
+yo axios-lambda:python [function-name]
 ```
 
 #### Multiple functions
@@ -67,7 +67,7 @@ yo axios:lambda-python [function-name]
 To generate multiple Lambda functions within a project, just re-use the generator
 
 ```bash
-yo axios:lambda-python [function-name]
+yo axios-lambda:python [function-name]
 ```
 
 ## Deploying

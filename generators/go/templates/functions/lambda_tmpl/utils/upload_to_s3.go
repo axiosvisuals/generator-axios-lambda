@@ -3,7 +3,7 @@ package utils
 import (
 	"context"
 	"fmt"
-	"os"
+	"io"
 	"time"
 
 	"github.com/aws/aws-sdk-go/aws"
@@ -13,14 +13,14 @@ import (
 	"github.com/aws/aws-sdk-go/service/s3"
 )
 
-// Uploads a file to S3 given a bucket and object key. Also takes a duration
+// Uploads a file to S3 given a reader, bucket and object key. Also takes a duration
 // value to terminate the update if it doesn't complete within that time.
 //
 // The AWS Region needs to be provided in the AWS shared config or on the
 // environment variable as `AWS_REGION`. Credentials also must be provided
 // Will default to shared config file, but can load from environment if provided.
 //
-func main(bucket string, key string, timeout time.Duration) {
+func main(r io.ReadSeeker, bucket string, key string, timeout time.Duration) {
 	// All clients require a Session. The Session provides the client with
 	// shared configuration such as region, endpoint, and credentials. A
 	// Session should be shared where possible to take advantage of
@@ -50,17 +50,16 @@ func main(bucket string, key string, timeout time.Duration) {
 	_, err := svc.PutObjectWithContext(ctx, &s3.PutObjectInput{
 		Bucket: aws.String(bucket),
 		Key:    aws.String(key),
-		Body:   os.Stdin,
+		Body:   r,
 	})
 	if err != nil {
 		if aerr, ok := err.(awserr.Error); ok && aerr.Code() == request.CanceledErrorCode {
 			// If the SDK can determine the request or retry delay was canceled
 			// by a context the CanceledErrorCode error code will be returned.
-			fmt.Fprintf(os.Stderr, "upload canceled due to timeout, %v\n", err)
+			fmt.Printf("upload canceled due to timeout, %v\n", err)
 		} else {
-			fmt.Fprintf(os.Stderr, "failed to upload object, %v\n", err)
+			fmt.Printf("failed to upload object, %v\n", err)
 		}
-		os.Exit(1)
 	}
 
 	fmt.Printf("successfully uploaded file to %s/%s\n", bucket, key)

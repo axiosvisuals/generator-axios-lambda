@@ -1,20 +1,19 @@
 package utils
 
 import (
-	"fmt"
 	"io"
+	"log"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3/s3manager"
 )
 
-// Uploads a file to S3 given a reader, bucket and object filename.
+// UploadToS3 : Uploads a file to S3 given a reader, bucket and object filename.
 // The AWS Region needs to be provided in the AWS shared config or on the
 // environment variable as `AWS_REGION`. Credentials also must be provided
 // Will default to shared config file, but can load from environment if provided.
-//
-func main(r io.ReadSeeker, bucket string, filename string) {
+func UploadToS3(r io.ReadSeeker, bucket string, filename string) {
 	// All clients require a Session. The Session provides the client with
 	// shared configuration such as region, endpoint, and credentials. A
 	// Session should be shared where possible to take advantage of
@@ -34,8 +33,7 @@ func main(r io.ReadSeeker, bucket string, filename string) {
 		Body:   r,
 	})
 	if err != nil {
-
-		fmt.Printf("failed to upload object, %v\n", err)
+		log.Fatal(err)
 	}
-	fmt.Printf("successfully uploaded file to %s/%s\n", bucket, filename)
+	log.Printf("successfully uploaded file to %s/%s\n", bucket, filename)
 }

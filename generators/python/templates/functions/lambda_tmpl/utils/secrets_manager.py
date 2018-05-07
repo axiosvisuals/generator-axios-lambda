@@ -4,6 +4,7 @@ import json
 import logging
 
 import boto3
+import botocore
 
 
 
@@ -26,7 +27,7 @@ def get_secret(secret_name, region_name):
         get_secret_value_response = client.get_secret_value(
             SecretId=secret_name
         )
-    except ClientError as e:
+    except botocore.exceptions.ClientError as e:
         if e.response['Error']['Code'] == 'ResourceNotFoundException':
             logger.error('The requested secret ' + secret_name + ' was not found')
         elif e.response['Error']['Code'] == 'InvalidRequestException':

@@ -42,7 +42,7 @@ def write_to_s3(data, filename, s3_bucket_name, output_type):
             s3_client.put_object(
                 Bucket=s3_bucket_name,
                 Key=filename,
-                Body=Body=csv_buffer.getvalue(),
+                Body=csv_buffer.getvalue(),
                 Metadata={'Content-Type': 'text/csv'}
             )
     except Exception as e:

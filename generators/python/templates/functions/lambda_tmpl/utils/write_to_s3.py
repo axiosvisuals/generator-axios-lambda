@@ -7,7 +7,7 @@ import logging
 
 import boto3
 
-def write_to_s3(data, filename, s3_bucket_name, output_type):
+def write_to_s3(data, filename, s3_bucket_name, output_type, s3_client=boto3.client('s3')):
     """
     A helper function for publishing a Python dictionary to S3 as a JSON file.
     This assumes you have S3 write permissions in AWS.
@@ -20,9 +20,8 @@ def write_to_s3(data, filename, s3_bucket_name, output_type):
     Returns: None
     """
     logger = logging.getLogger()
-    s3_client = boto3.client('s3')
     if output_type not in ('csv', 'json'):
-        logger.error(e, "Error: invalid S3 output filetype")
+        logger.error("Error: invalid S3 output filetype")
         pass
     try:
         if output_type == 'json':
@@ -46,4 +45,5 @@ def write_to_s3(data, filename, s3_bucket_name, output_type):
                 Metadata={'Content-Type': 'text/csv'}
             )
     except Exception as e:
-        logger.error(e, "Error uploading file to S3")
+        logger.error("Error uploading file to S3")
+        logger.error(e)

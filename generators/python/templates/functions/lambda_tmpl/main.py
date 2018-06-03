@@ -1,7 +1,3 @@
-"""
-Lambda example with external dependency
-"""
-
 import logging
 import requests
 import boto3

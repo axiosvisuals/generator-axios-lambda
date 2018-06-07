@@ -1,15 +1,9 @@
 'use strict';
-var path = require('path');
-var slugify = require('slugify');
-var mkdirp = require('mkdirp');
-var dateFormat = require('dateformat');
-
 var Generator = require('yeoman-generator');
 
-module.exports = Generator.extend({
-  constructor: function () {
-    Generator.apply(this, arguments);
-
+module.exports = class extends Generator{
+  constructor(args, opts) {
+    super(args, opts);
     this.option('vpc', {
       desc: 'Add VPC settings to connect to other AWS services',
       type: String,
@@ -25,49 +19,46 @@ module.exports = Generator.extend({
       desc: 'Skips installing dependencies',
       type: Boolean
     });
-  },
+  }
 
-  initializing: function () {
+  initializing() {
     this.pkg = require('../../package.json');
-  },
+  }
 
-  prompting: {
-    meta: function() {
-      var done = this.async();
-      var dateString = dateFormat(new Date(), 'yyyy-mm-dd')
-      this.prompt([{
-        type    : 'input',
-        name    : 'name',
-        message : 'Project Name:',
-        default : this.appname      // Default to current folder name
-      },{
-        type    : 'input',
-        name    : 'description',
-        message : 'Project Description:',
-        default : this.appname      // Default to current folder name
-      },{
-        type    : 'input',
-        name    : 'timeout',
-        message : 'Timeout integer, in seconds, before function is terminated. Defaults to 30:',
-        default : 30    // Default to current folder name
-      },{
-        type    : 'confirm',
-        name    : 'gitInit',
-        message : 'Initialize empty git repository:',
-        default : true,
-      }]).then(function(answers, err) {
-        this.meta = {};
-        this.meta.name = answers.name;
-        this.meta.description = answers.description;
-        this.meta.timeout = answers.timeout;
-        this.gitInit = answers.gitInit;
-        this.meta.vpc = this.options.vpc? true : false;
-        done(err);
-      }.bind(this));
-    }
-  },
+  prompting() {
+    var done = this.async();
+    this.prompt([{
+      type    : 'input',
+      name    : 'name',
+      message : 'Project Name:',
+      default : this.appname      // Default to current folder name
+    },{
+      type    : 'input',
+      name    : 'description',
+      message : 'Project Description:',
+      default : this.appname      // Default to current folder name
+    },{
+      type    : 'input',
+      name    : 'timeout',
+      message : 'Timeout integer, in seconds, before function is terminated. Defaults to 30:',
+      default : 30    // Default to current folder name
+    },{
+      type    : 'confirm',
+      name    : 'gitInit',
+      message : 'Initialize empty git repository:',
+      default : true,
+    }]).then(function(answers, err) {
+      this.meta = {};
+      this.meta.name = answers.name;
+      this.meta.description = answers.description;
+      this.meta.timeout = answers.timeout;
+      this.gitInit = answers.gitInit;
+      this.meta.vpc = this.options.vpc? true : false;
+      done(err);
+    }.bind(this));
+  }
 
-  configuring: function() {
+  configuring() {
     // Copy all the normal files.
     this.fs.copyTpl(
       this.templatePath("**/*"),
@@ -81,8 +72,9 @@ module.exports = Generator.extend({
       this.destinationRoot(),
       { meta: this.meta }
     );
-  },
-  end: function() {
+  }
+
+  end() {
     this.log("Success! Welcome to your new lambda apex project. Next steps are:\n")
     this.log("1. Make sure you have awscli and Apex installed\n")
     this.log("\t> aws --help")
@@ -94,4 +86,4 @@ module.exports = Generator.extend({
     this.log("OR...\n")
     this.log("\t> axios:lambda-python <function name>")
   }
-});
+};

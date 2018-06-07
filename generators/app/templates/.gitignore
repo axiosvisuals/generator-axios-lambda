@@ -27,7 +27,8 @@ env.json
 tmp/*.zip
 dist/*.zip
 
-functions/*/**
+functions/*/*
+!functions/*/utils
 !functions/*/*.py
 !functions/*/*.js
 !functions/*/*.json

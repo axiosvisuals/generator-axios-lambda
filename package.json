@@ -18,15 +18,14 @@
   ],
   "author": "Gerald Rich <gerald@axios.com>",
   "contributors": [
-    "Catherine Sheffo <catherine@axios.com>"
+    "Catherine Sheffo",
+    "Kaya Baber <kaya.baber@axios.com>"
   ],
   "license": "Apache-2.0",
   "dependencies": {
-    "yeoman-generator": "^1.1.0"
+    "yeoman-generator": "^2.0.5"
   },
   "devDependencies": {
-    "dateformat": "^2.0.0",
-    "mkdirp": "^0.5.1",
-    "slugify": "^1.1.0"
+    "slugify": "^1.3.0"
   }
 }

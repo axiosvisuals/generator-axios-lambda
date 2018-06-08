@@ -23,7 +23,7 @@ module.exports = class extends Generator{
     this.prompt([{
       type    : 'input',
       name    : 'description',
-      message : 'Function Description:',
+      message : 'Function Description:'
     }]).then(function(answers, err) {
       this.meta = {};
       this.meta.functionName = slugify(this.options['function-name'], '_');

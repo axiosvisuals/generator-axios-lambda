@@ -1,4 +1,3 @@
-'use strict';
 var path = require('path');
 var slugify = require('slugify');
 
@@ -13,20 +12,9 @@ module.exports = class extends Generator{
       type: String,
       required: true
     });
-
-    this.option('skip-install-message', {
-      desc: 'Skips the message after the installation of dependencies',
-      type: Boolean
-    });
-
-    this.option('skip-install', {
-      desc: 'Skips installing dependencies',
-      type: Boolean
-    });
   }
 
   initializing() {
-    this.pkg = require('../../package.json');
     this.composeWith(require.resolve('../app'));
   }
 
@@ -36,15 +24,13 @@ module.exports = class extends Generator{
       type    : 'input',
       name    : 'description',
       message : 'Function Description:',
-      default : ''
     }]).then(function(answers, err) {
       this.meta = {};
-      this.meta.functionName = slugify(this.options['function-name'], {separator: '_'});
+      this.meta.functionName = slugify(this.options['function-name'], '_');
       this.meta.description = answers.description;
       done(err);
     }.bind(this));
   }
-
 
   configuring() {
     // Copy all the normal files.
@@ -69,7 +55,7 @@ module.exports = class extends Generator{
   install() {
     var currSubFolder = 'functions/' + this.options['function-name'];
     var currRequirements = currSubFolder + '/requirements.txt';
-    this.spawnCommand('cd',[currSubFolder])
+    this.spawnCommand('cd', [currSubFolder])
     this.spawnCommand('pip3', ['install', '-r', currRequirements, '-t', currSubFolder])
   }
 

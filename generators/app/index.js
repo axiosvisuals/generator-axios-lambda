@@ -1,7 +1,6 @@
 var slugify = require('slugify');
-var dateFormat = require('dateformat');
-
 var Generator = require('yeoman-generator');
+
 module.exports = class extends Generator{
   constructor(args, opts) {
     super(args,opts);
@@ -11,39 +10,24 @@ module.exports = class extends Generator{
       type: String,
       required: false
     });
-
-    this.option('skip-install-message', {
-      desc: 'Skips the message after the installation of dependencies',
-      type: Boolean
-    });
-
-    this.option('skip-install', {
-      desc: 'Skips installing dependencies',
-      type: Boolean
-    });
-  }
-
-  initializing() {
-    this.pkg = require('../../package.json');
   }
 
   prompting() {
     var done = this.async();
-    var dateString = dateFormat(new Date(), 'yyyy-mm-dd');
     this.prompt([{
       type    : 'input',
       name    : 'name',
       message : 'Project Name:',
-      default : slugify(this.appname, {separator: '_'}) // Default to current folder name
+      default : slugify(this.appname, '_') // Default to current folder name
     },{
       type    : 'input',
       name    : 'description',
       message : 'Project Description:',
-      default : this.determineAppname // Default to current folder name
+      default : this.appname // Default to current folder name
     },{
       type    : 'input',
       name    : 'timeout',
-      message : 'Timeout integer, in seconds, before function is terminated. Defaults to 30:',
+      message : 'Timeout integer, in seconds, before function is terminated. Defaults to 15:',
       default : 15
     },{
       type    : 'confirm',

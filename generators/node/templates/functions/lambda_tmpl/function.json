@@ -1,5 +1,6 @@
 {
   "description": "<%= meta.description %>",
+  "runtime": "nodejs8.10",
   "hooks":{
     "build": "npm install"
   }

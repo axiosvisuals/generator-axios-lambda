@@ -3,8 +3,7 @@ var Generator = require('yeoman-generator');
 
 module.exports = class extends Generator{
   constructor(args, opts) {
-    super(args,opts);
-
+    super(args, opts);
     this.option('vpc', {
       desc: 'Add VPC settings to connect to other AWS services',
       type: String,
@@ -69,8 +68,6 @@ module.exports = class extends Generator{
     this.log("\n2. If either command errors, run the following command:\n");
     this.log("\t> ./setup.sh\n");
     this.log("3. Create Python or Node.js functions for your project:\n");
-    this.log("\t> yo axios:lambda-node <function name>\n");
-    this.log("OR...\n");
-    this.log("\t> axios:lambda-python <function name>");
+    this.log("\t> yo axios:lambda-<language> <function name>\n");
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "generator-axios-lambda",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "scripts": {
     "setup": "npm install -g yo gulp-cli && npm install && npm link"

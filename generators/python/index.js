@@ -6,7 +6,6 @@ var Generator = require('yeoman-generator');
 module.exports = class extends Generator{
   constructor(args, opts) {
     super(args, opts);
-
     this.argument('function-name', {
       desc: 'Name of the function to generate',
       type: String,

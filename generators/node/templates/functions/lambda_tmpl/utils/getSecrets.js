@@ -1,17 +1,18 @@
 const SecretsManager = require("aws-sdk/clients/secretsmanager");
 
-export default ({secretId, region}) => {
+module.export = ({secretId, region="us-east-1"}) => {
   console.log("Getting secrets");
-  const endpointURL = `https://secretsmanager.${region}.amazonaws.com`;
+  const endpoint = `https://secretsmanager.${region}.amazonaws.com`;
   return new Promise((resolve, reject) => {
-    new SecretsManager({
+    const params = {
       endpoint: endpoint,
       region: region
-    })
-    .getSecretValue({ SecretId: secretId })
-    .then((data) => {
-      resolve(data);
-    })
-    .catch(reject);
+    };
+    new SecretsManager(params)
+      .getSecretValue({ SecretId: secretId })
+      .then((data) => {
+        resolve(data);
+      })
+      .catch(reject);
   })
 }

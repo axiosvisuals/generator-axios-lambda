@@ -1,6 +1,6 @@
 const SNS = require("aws-sdk/clients/sns");
 
-export default ({
+module.exports = ({
   jsonMsg,
   topicArn,
   summaryStr="SNS summary"

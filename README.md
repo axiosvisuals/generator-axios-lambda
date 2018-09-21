@@ -21,31 +21,6 @@ This will
 
 ## Developing
 
-### Encrypting secrets
-
-With this example, we'll use AWS KMS to store an encrypted copy of our API keys and then decrypt it on the fly with the Lambda function.  AWS MFA must be enabled to create the CMK.
-
-1. [Create a customer master key (CMK) in KMS](http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) and note the keyId that is automatically generated.
-
-2. Encrypt the certificate in KMS using the AWS CLI tools:
-
-```
-aws kms encrypt --key-id KEY_FROM_STEP_1 --plaintext file://functions/SOME_FUNCTION/secrets.json --output json > functions/SOME_FUNCTION/encrypted_secrets.json`
-```
-
-This comand takes a file from the `file://` path, outputs JSON with the encrypted secrets, and saves it to a new file `encrypted_secrets.json`.
-
-3.You will receive a response with a CiphertextBlob if successful.  An example of a successful response will look like:
-
-```
-{
-    "KeyId": "arn:aws:kms:us-east-1:123456789000:key/<YOUR KEY ID HERE>",
-    "CiphertextBlob": "<CIPHER TEXT BLOB HERE>"
-}
-```
-
-See the [AWS KMS CLI help](http://docs.aws.amazon.com/cli/latest/reference/kms/index.html) for more information on input and output encoding.
-
 ### Utils
 
 #### Decrypting secrets

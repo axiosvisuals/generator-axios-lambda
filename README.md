@@ -21,31 +21,6 @@ This will
 
 ## Developing
 
-### Encrypting secrets
-
-With this example, we'll use AWS KMS to store an encrypted copy of our API keys and then decrypt it on the fly with the Lambda function.  AWS MFA must be enabled to create the CMK.
-
-1. [Create a customer master key (CMK) in KMS](http://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html) and note the keyId that is automatically generated.
-
-2. Encrypt the certificate in KMS using the AWS CLI tools:
-
-```
-aws kms encrypt --key-id KEY_FROM_STEP_1 --plaintext file://functions/SOME_FUNCTION/secrets.json --output json > functions/SOME_FUNCTION/encrypted_secrets.json`
-```
-
-This comand takes a file from the `file://` path, outputs JSON with the encrypted secrets, and saves it to a new file `encrypted_secrets.json`.
-
-3.You will receive a response with a CiphertextBlob if successful.  An example of a successful response will look like:
-
-```
-{
-    "KeyId": "arn:aws:kms:us-east-1:123456789000:key/<YOUR KEY ID HERE>",
-    "CiphertextBlob": "<CIPHER TEXT BLOB HERE>"
-}
-```
-
-See the [AWS KMS CLI help](http://docs.aws.amazon.com/cli/latest/reference/kms/index.html) for more information on input and output encoding.
-
 ### Utils
 
 #### Decrypting secrets
@@ -53,18 +28,48 @@ See the [AWS KMS CLI help](http://docs.aws.amazon.com/cli/latest/reference/kms/i
 Within the Python, `main.py`, you'll be able to decrypt the JSON and use it in your Python code. The code uses an AWS Python client, boto3, to establish a KMS client for decrypting your secrets. **Your Lambda function will also need permissions to use this KMS key**. Once you open up and read the encrypted file, you can read it in as a JSON string, then convert that to a Python dictionary.
 
 ```python
-"""
-TKTKTK
-"""
+def get_secret(secret_name, region_name):
+    """
+    A helper function for getting secrets from AWS Secrets Manager.
+
+    Required: Function role permissions for Secrets Manager.
+    Accepts: the name of the secret, the region the secrets is held in
+    Returns: a dictionary of API secrets, binary data, or None if an error occurs
+    """
 ```
 
 #### Publishing a message via SNS
 
-TKTKTK
+```python
+def publish_to_sns(json_message, topic_arn, summary_string="SNS summary"):
+    """
+    A helper function for publishing a message to SNS.
+    
+    Required: Function role permissions for SNS:Publish.
+    Accepts:
+        * a JSON containing the message to publish
+        * an SNS topic ARN string
+        * an optional summary string describing this message
+    Returns: None
+    """
+```
 
 #### Writing to S3
 
-TKTKTK
+```python
+def write_to_s3(data, filename, s3_bucket_name, output_type, s3_client=boto3.client('s3'), acl='private'):
+    """
+    A helper function for publishing a Python dictionary to S3 as a JSON file.
+
+    Required: Function role permissions for S3:PutObject, S3:PutObjectAcl
+    Accepts:
+        * a Python dictionary or list of the data you wish to put on S3
+        * the filename (and optionally its path) string to write to on S3
+        * the S3 bucket's name as a string
+        * the output filetype which is a string specifying CSV or JSON
+    Returns: None
+    """
+```
 
 ## Generators
 

@@ -25,21 +25,50 @@ This will
 
 #### Decrypting secrets
 
-Within the Python, `main.py`, you'll be able to decrypt the JSON and use it in your Python code. The code uses an AWS Python client, boto3, to establish a KMS client for decrypting your secrets. **Your Lambda function will also need permissions to use this KMS key**. Once you open up and read the encrypted file, you can read it in as a JSON string, then convert that to a Python dictionary.
-
 ```python
-"""
-TKTKTK
-"""
+def get_secret(secret_name, region_name):
+    """
+    A helper function for getting secrets from AWS Secrets Manager.
+
+    Required: Function role permissions for Secrets Manager.
+    Accepts: the name of the secret, the region the secrets is held in
+    Returns: a dictionary of API secrets, binary data, or None if an error occurs
+    """
 ```
 
 #### Publishing a message via SNS
+You can use SNS to create email alerts. Just [create](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) an SNS topic and [subscribe](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) to it.
 
-TKTKTK
+```python
+def publish_to_sns(json_message, topic_arn, summary_string="SNS summary"):
+    """
+    A helper function for publishing a message to SNS.
+    
+    Required: Function role permissions for SNS:Publish.
+    Accepts:
+        * a JSON containing the message to publish
+        * an SNS topic ARN string
+        * an optional summary string describing this message
+    Returns: None
+    """
+```
 
 #### Writing to S3
 
-TKTKTK
+```python
+def write_to_s3(data, filename, s3_bucket_name, output_type, s3_client=boto3.client('s3'), acl='private'):
+    """
+    A helper function for publishing a Python dictionary to S3 as a JSON file.
+
+    Required: Function role permissions for S3:PutObject, S3:PutObjectAcl
+    Accepts:
+        * a Python dictionary or list of the data you wish to put on S3
+        * the filename (and optionally its path) string to write to on S3
+        * the S3 bucket's name as a string
+        * the output filetype which is a string specifying CSV or JSON
+    Returns: None
+    """
+```
 
 ## Generators
 

@@ -1,9 +1,15 @@
 const SNS = require("aws-sdk/clients/sns");
 
+/**
+ * Publishes stringified JSON to another Lambda function via SNS
+ * @param  {string} jsonMsg
+ * @param  {string} topicArn
+ * @param  {string} summaryStr="SNSsummary"
+ */
 module.exports = async ({
   jsonMsg,
   topicArn,
-  summaryStr="SNS summary"
+  summaryStr = "SNS summary"
 }) => {
   console.log("Publishing SNS");
   const params = {
@@ -12,9 +18,9 @@ module.exports = async ({
     MessageStructure: "string",
     MessageAttributes: {
       "summary": {
-          StringValue: summaryStr,
-          DataType: "String"
-        }
+        StringValue: summaryStr,
+        DataType: "String"
+      }
     }
   };
   const sns = new SNS();

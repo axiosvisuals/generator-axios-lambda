@@ -19,6 +19,46 @@ This will
 * Install local dependencies
 * Link `generators/app/` to `yo`
 
+## Generators
+
+### axios-lambda:node
+
+`yo axios-lambda:node function_name`
+
+Generate an AWS Lambda project with a Node.js function, named `function_name`
+
+```bash
+mkdir [project-name] && cd $_
+yo axios-lambda:node [function-name]
+```
+
+#### Multiple functions
+
+To generate multiple Lambda functions within a project, just re-use the generator
+
+```bash
+yo axios-lambda:node [function-name]
+```
+
+### axios-lambda:python
+
+`yo axios-lambda:python function_name`
+
+Generate an AWS Lambda project with a Python function, named `function_name`
+
+```bash
+mkdir [project-name] && cd $_
+yo axios-lambda:python [function-name]
+```
+
+#### Multiple functions
+
+To generate multiple Lambda functions within a project, just re-use the generator
+
+```bash
+yo axios-lambda:python [function-name]
+```
+
 ## Developing
 
 ### Encrypting secrets
@@ -65,46 +105,6 @@ TKTKTK
 #### Writing to S3
 
 TKTKTK
-
-## Generators
-
-### axios-lambda:node
-
-`yo axios-lambda:node function_name`
-
-Generate an AWS Lambda project with a Node.js function, named `function_name`
-
-```bash
-mkdir [project-name] && cd $_
-yo axios-lambda:node [function-name]
-```
-
-#### Multiple functions
-
-To generate multiple Lambda functions within a project, just re-use the generator
-
-```bash
-yo axios-lambda:node [function-name]
-```
-
-### axios-lambda:python
-
-`yo axios-lambda:python function_name`
-
-Generate an AWS Lambda project with a Python function, named `function_name`
-
-```bash
-mkdir [project-name] && cd $_
-yo axios-lambda:python [function-name]
-```
-
-#### Multiple functions
-
-To generate multiple Lambda functions within a project, just re-use the generator
-
-```bash
-yo axios-lambda:python [function-name]
-```
 
 ## Deploying
 
@@ -184,6 +184,14 @@ OR
 
 ```sh
 $ apex deploy foo -E env.json -z tmp/foo.zip
+```
+
+## Invoking
+
+After you've deployed, you can run the function and check the logs.
+
+```sh
+apex invoke -L [function_name]
 ```
 
 ## Scheduling

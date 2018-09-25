@@ -25,8 +25,6 @@ This will
 
 #### Decrypting secrets
 
-Within the Python, `main.py`, you'll be able to decrypt the JSON and use it in your Python code. The code uses an AWS Python client, boto3, to establish a KMS client for decrypting your secrets. **Your Lambda function will also need permissions to use this KMS key**. Once you open up and read the encrypted file, you can read it in as a JSON string, then convert that to a Python dictionary.
-
 ```python
 def get_secret(secret_name, region_name):
     """
@@ -39,6 +37,7 @@ def get_secret(secret_name, region_name):
 ```
 
 #### Publishing a message via SNS
+You can use SNS to create email alerts. Just [create](https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) an SNS topic and [subscribe](https://docs.aws.amazon.com/sns/latest/dg/SubscribeTopic.html) to it.
 
 ```python
 def publish_to_sns(json_message, topic_arn, summary_string="SNS summary"):
